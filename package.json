@@ -12,7 +12,7 @@
     "dev:renderer": "vite",
     "start": "electron ./dist/main/index.js",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "format": "lsla prettier \"src/**/*.{ts,tsx,scss,css,json}\" \"*.{js,ts,json}\" \"script/*.mjs\" --write",
+    "format": "lsla prettier \"indextts/env/*.mjs\" \"src/**/*.{ts,tsx,scss,css,json}\" \"*.{js,ts,json}\" \"script/*.mjs\" --write",
     "genTheme": "lsla genTheme --input src/common/theme.json --output src/renderer/theme.scss && lsla genTheme --input src/common/theme.json --output src/common/theme.ts"
   },
   "repository": {
@@ -37,6 +37,7 @@
     "electron": "30.5.1",
     "eslint": "^9.32.0",
     "eslint-config-prettier": "^10.1.8",
+    "execa": "^9.6.0",
     "fs-extra": "^11.3.0",
     "licia": "^1.48.0",
     "react": "^19.1.1",

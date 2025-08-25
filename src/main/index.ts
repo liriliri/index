@@ -4,6 +4,7 @@ import * as main from './window/main'
 import * as language from 'share/main/lib/language'
 import * as theme from 'share/main/lib/theme'
 import * as ipc from 'share/main/lib/ipc'
+import * as indextts from './window/indextts'
 import { setupTitlebar } from 'custom-electron-titlebar/main'
 
 const logger = log('main')
@@ -23,5 +24,6 @@ app.on('ready', () => {
   language.init()
   theme.init()
   ipc.init()
+  indextts.start()
   main.showWin()
 })
