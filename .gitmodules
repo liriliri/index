@@ -1,3 +1,6 @@
 [submodule "src/share"]
 	path = src/share
 	url = https://github.com/liriliri/electron-share.git
+[submodule "indextts/index-tts"]
+	path = indextts/index-tts
+	url = https://github.com/liriliri/index-tts.git
