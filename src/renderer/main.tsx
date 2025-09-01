@@ -24,6 +24,10 @@ function renderApp() {
       App = lazy(() => import('./indextts/App.js') as Promise<any>)
       title = 'Index TTS'
       break
+    case 'about':
+      App = lazy(() => import('share/renderer/about/App.js') as Promise<any>)
+      title = t('aboutRem')
+      break  
     case 'terminal':
       App = lazy(() => import('share/renderer/terminal/App.js') as Promise<any>)
       title = t('terminal')
