@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'index-icon';
+  src: url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAWkAAsAAAAACPgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAAGcAAACMIR8mAk9TLzIAAAFwAAAAPQAAAFZL+0kkY21hcAAAAbAAAADUAAACbAZxwp5nbHlmAAAChAAAARcAAAGESIRjSWhlYWQAAAOcAAAALgAAADZzrb4saGhlYQAAA8wAAAAWAAAAJAGRANlobXR4AAAD5AAAABAAAABAAlgAAGxvY2EAAAP0AAAAEgAAACIFvgU8bWF4cAAABAgAAAAfAAAAIAEdAFhuYW1lAAAEKAAAASkAAAIWm5e+CnBvc3QAAAVUAAAAUAAAAHC5/cU1eJxNjDsKgEAMRN/q+lt/YGnhGawtrMTK0gtYiSBW3h9HRTBhyGReCAZwtPR4wzjNFPtyHtRY3rr535t9WxfibxOzz4ylDk+/mic1RASE6kgsEQmp8JUVkqNUYknJyHV7e3cBdyoGZAB4nGNgZFBjnMDAysDAUMfQAyRloHQCAyeDMQMDEwMrMwNWEJDmmsJwgCH5IzPDCSBXCEwyMDCCCABjOwitAAAAeJy9kkFuwkAMRd9kAklICIhFF1WP0FtVVYqQKBIIKddhxUF6oZwg/Z7xpmLRVWvrZTR/MrZlD7AAongVJYQ7AbOb1JD0yCrpJVftd2ylFLzxzp4DJy6MU5xnnZk2SDtylhaS9tOC7ps/yZ95kaPoCxp6KjbUtHTKtGStfwurLCwfovyFpSp6q4G67dSLlHb9L7l/ty59v3ynGtXrjGajrmdsloPTiA+nF3unEgfH4hydWnw6rTg5lvns6H1o2hlrz+ioS1PI2JuZigy2xgzxG1U8Ibp4nHWPwUrEMBRF381Lk4IMrdM2BQetdJgWRhhxpkkXggUREWZrV7qZHxD8A8H/cOdKQcSf8LNsRjcKhhDevYfHzSVB/rzTB53Tmqh1tm6Xja0XiFAdY4EjlCrTSteViqDSVa5zXaYFDtDBFEjNKZbOtq7Njevgmqkuq8YtTaqegF3EYCRaCwgcQnCoksGIPPE3+qb8B6534tjE8W3A4YjFBEAYcAYhkHEQDnIieBT+z5TfNrFvxtt+r/RCezSnxdCwccOPzT5SNVSrvLLTLFVlZae/kW2zle2YN0JKMfNP0cuAZ1JsmLf26PrZ214Gsi/8/EOkuOl7n4xt/ie9kSbqkOv6pG6v7sYP8iI5u08e5eX4C95uI18AeJxjYGRgYABiO5HE4nh+m68M3AwngAJRnI/3NSBoIDjBsBlIcjAwgTgAHwgKKgAAeJxjYGRgYDjBwIBEMjKgAgEAOwACawAAeJxjYACCE0iYRAAAgSgCWXicY2AAggKGDQyHcEEAn3QK+wAAeJxjYGRgYBBg8GFgZgABJiDmAkIGhv9gPgMAEasBdgB4nGWQPW7CQBSEx2BIAlKCFCkps1UKIpmfkgNAT0GXwpi1MbK91npBossJcoQcIaeIcoIcKGPzaGAtP38zb97uygAG+IWHenm4bWq9WrihOnGb9CDsk5+FO+jjRbhLfyjcwxumwn084p07eP4dnQFK4Rbu8SHcpv8p7JO/hDt4wrdwl/6PcA8r/An38eoN08gUsSncUif7LLRnef6utK1SU6hJMD5bC11oGzq9Ueujqg7J1LlYxdbkas6uzjKjSmt2OnLB1rlyNhrF4geRyZEigkGBuKkOS2gk2CNDCHvVvdQrpi0q+rVWmCDA+Cq1YKpokiGVxobJNY6sFQ48bUrXMa34Ws7kpLnMat4kIyv+77q3oxPRD7BtpkrMMOITX+SD5g75Pz0RXqgAAAB4nF3FywqAIBRAwXtKs3f2jSIVggq58e9bRJtmM9LI6/vP0tCi0HQYegZGJmYWVjYsu5jbl3LFQ7mUq3and4EbT+EicuBIZConQeQBZ7YMqA==')
+    format('woff');
+}
+
+[class^='icon-'],
+[class*=' icon-'] {
+  display: inline-block;
+  font-family: 'index-icon' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-setting:before {
+  content: '\f101';
+}
+.icon-copy:before {
+  content: '\f102';
+}
+.icon-check:before {
+  content: '\f103';
+}

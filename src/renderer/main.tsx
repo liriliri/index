@@ -5,8 +5,10 @@ import pkg from '../../package.json'
 import getUrlParam from 'licia/getUrlParam'
 import { t } from '../common/util'
 import 'share/renderer/main'
+import 'luna-toolbar/css'
 import 'share/renderer/luna.scss'
 import 'share/renderer/main.scss'
+import './icon.css'
 
 const logger = log('renderer')
 logger.info('start')
@@ -27,7 +29,7 @@ function renderApp() {
     case 'about':
       App = lazy(() => import('share/renderer/about/App.js') as Promise<any>)
       title = t('aboutRem')
-      break  
+      break
     case 'terminal':
       App = lazy(() => import('share/renderer/terminal/App.js') as Promise<any>)
       title = t('terminal')

@@ -17,5 +17,6 @@
   "donate": "Donate",
   "tools": "Tools",
   "terminal": "Terminal",
-  "clear": "Clear"
+  "clear": "Clear",
+  "indexTTSErrConfirm": "Something is wrong with Index TTS. Do you want to open terminal to view the logs?"
 }

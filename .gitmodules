@@ -4,3 +4,6 @@
 [submodule "indextts/index-tts"]
 	path = indextts/index-tts
 	url = https://github.com/liriliri/index-tts.git
+[submodule "src/renderer/icon"]
+	path = src/renderer/icon
+	url = https://github.com/liriliri/icon-share.git

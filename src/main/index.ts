@@ -5,6 +5,7 @@ import * as language from 'share/main/lib/language'
 import * as theme from 'share/main/lib/theme'
 import * as ipc from 'share/main/lib/ipc'
 import * as indextts from './window/indextts'
+import * as main from './window/main'
 import * as terminal from 'share/main/window/terminal'
 import { setupTitlebar } from 'custom-electron-titlebar/main'
 
@@ -27,6 +28,6 @@ app.on('ready', () => {
   terminal.init()
   ipc.init()
   indextts.init()
-  indextts.showWin()
+  main.showWin()
   menu.init()
 })
