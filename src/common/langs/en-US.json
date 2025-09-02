@@ -18,5 +18,6 @@
   "tools": "Tools",
   "terminal": "Terminal",
   "clear": "Clear",
-  "indexTTSErrConfirm": "Something is wrong with Index TTS. Do you want to open terminal to view the logs?"
+  "indexTTSErrConfirm": "Something is wrong with Index TTS. Do you want to open terminal to view the logs?",
+  "enterText": "Please enter the target text"
 }

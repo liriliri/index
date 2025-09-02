@@ -18,5 +18,6 @@
   "tools": "工具",
   "terminal": "控制台",
   "clear": "清空",
-  "indexTTSErrConfirm": "Index TTS 出问题了。是否打开终端查看日志？"
+  "indexTTSErrConfirm": "Index TTS 出问题了。是否打开终端查看日志？",
+  "enterText": "请输入目标文本"
 }
