@@ -7,7 +7,7 @@ import { t } from '../../common/util'
 class Store extends BaseStore {
   isIndexTTSReady = false
   isIndexTTSErr = false
-  sidebarWeight = 25
+  sidebarWeight = 30
   audioWeight = 30
   constructor() {
     super()

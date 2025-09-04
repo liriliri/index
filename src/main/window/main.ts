@@ -1,16 +1,12 @@
 import * as window from 'share/main/lib/window'
-import { getMainStore } from '../lib/store'
-
-const store = getMainStore()
 
 export function showWin() {
   const win = window.create({
     name: 'main',
-    minWidth: 960,
-    minHeight: 640,
-    ...store.get('bounds'),
-    maximized: store.get('maximized'),
-    onSavePos: () => window.savePos(win, store, true),
+    minWidth: 1280,
+    minHeight: 850,
+    width: 1280,
+    height: 850,
     menu: true,
   })
 

@@ -10,10 +10,15 @@ export default function Editor() {
       <LunaSplitPaneItem
         className={Style.text}
         weight={100 - store.sidebarWeight}
+        minSize={400}
       >
         <textarea placeholder={t('enterText')} />
       </LunaSplitPaneItem>
-      <LunaSplitPaneItem className={Style.sidebar} weight={store.sidebarWeight}>
+      <LunaSplitPaneItem
+        className={Style.sidebar}
+        weight={store.sidebarWeight}
+        minSize={350}
+      >
         <Sidebar />
       </LunaSplitPaneItem>
     </LunaSplitPane>
