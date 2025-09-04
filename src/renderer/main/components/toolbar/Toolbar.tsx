@@ -10,8 +10,12 @@ import store from '../../store'
 import Style from './Toolbar.module.scss'
 import CopyButton from 'share/renderer/components/CopyButton'
 import ToolbarIcon from 'share/renderer/components/ToolbarIcon'
+import { useState } from 'react'
+import SettingsModal from './SettingsModal'
 
 export default observer(function Toolbar() {
+  const [settingsModalVisible, setSettingsModalVisible] = useState(false)
+
   const loading = (
     <LunaToolbarHtml>
       {store.isIndexTTSReady || store.isIndexTTSErr ? null : (
@@ -26,13 +30,25 @@ export default observer(function Toolbar() {
   )
 
   return (
-    <LunaToolbar>
-      <LunaToolbarButton onClick={() => {}}>
-        <CopyButton className="toolbar-icon" onClick={() => {}} />
-      </LunaToolbarButton>
-      {loading}
-      <LunaToolbarSpace />
-      <ToolbarIcon icon="setting" title={t('settings')} onClick={() => {}} />
-    </LunaToolbar>
+    <>
+      <LunaToolbar>
+        <LunaToolbarButton onClick={() => {}}>
+          <CopyButton className="toolbar-icon" onClick={() => {}} />
+        </LunaToolbarButton>
+        {loading}
+        <LunaToolbarSpace />
+        <ToolbarIcon
+          icon="setting"
+          title={t('settings')}
+          onClick={() => setSettingsModalVisible(true)}
+        />
+      </LunaToolbar>
+      <SettingsModal
+        visible={settingsModalVisible}
+        onClose={() => {
+          setSettingsModalVisible(false)
+        }}
+      />
+    </>
   )
 })

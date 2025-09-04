@@ -3,10 +3,12 @@ import { createRoot } from 'react-dom/client'
 import log from 'share/common/log'
 import pkg from '../../package.json'
 import getUrlParam from 'licia/getUrlParam'
-import { t } from '../common/util'
+import { t, i18n } from '../common/util'
 import 'share/renderer/main'
 import 'luna-toolbar/css'
 import 'luna-split-pane/css'
+import 'luna-modal/css'
+import 'luna-setting/css'
 import 'share/renderer/luna.scss'
 import 'share/renderer/main.scss'
 import './icon.css'
@@ -43,5 +45,8 @@ function renderApp() {
 }
 
 ;(async function () {
+  const language = await main.getLanguage()
+  i18n.locale(language)
+
   renderApp()
 })()

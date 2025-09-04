@@ -1,14 +1,16 @@
 import { makeObservable, observable, runInAction } from 'mobx'
 import BaseStore from 'share/renderer/store/BaseStore'
-import * as indexTTS from '../lib/indextts'
+import * as indexTTS from '../../lib/indextts'
 import LunaModal from 'luna-modal'
-import { t } from '../../common/util'
+import { t } from '../../../common/util'
+import { Settings } from './settings'
 
 class Store extends BaseStore {
   isIndexTTSReady = false
   isIndexTTSErr = false
   sidebarWeight = 30
   audioWeight = 30
+  settings = new Settings()
   constructor() {
     super()
 

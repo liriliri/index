@@ -19,5 +19,14 @@
   "terminal": "Terminal",
   "clear": "Clear",
   "indexTTSErrConfirm": "Something is wrong with Index TTS. Do you want to open terminal to view the logs?",
-  "enterText": "Please enter the target text"
+  "enterText": "Please enter the target text",
+  "settings": "Settings",
+  "appearance": "Appearance",
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark",
+  "sysPreference": "System Preference",
+  "language": "Language",
+  "requireReload": "Requires reload",
+  "restartIndex": "Restart INDEX"
 }
