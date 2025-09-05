@@ -5,6 +5,7 @@ import LunaModal from 'luna-modal'
 import { t } from '../../../common/util'
 import { Settings } from './settings'
 import { setMainStore } from '../../lib/util'
+import fileUrl from 'licia/fileUrl'
 
 interface ISample {
   url: string
@@ -28,6 +29,7 @@ class Store extends BaseStore {
       sidebarWeight: observable,
       audioWeight: observable,
       text: observable,
+      sample: observable,
       setText: action,
     })
 
@@ -43,6 +45,14 @@ class Store extends BaseStore {
     if (text) {
       runInAction(() => {
         this.text = text
+      })
+    }
+
+    const sample = await main.getMainStore('sample')
+    if (!sample) {
+      const defaultSample = await main.resolveResources('sample.wav')
+      runInAction(() => {
+        this.sample = { url: fileUrl(defaultSample), name: t('sampleTip') }
       })
     }
 
