@@ -29,5 +29,7 @@
   "language": "Language",
   "requireReload": "Requires reload",
   "restartIndex": "Restart INDEX",
-  "generate": "Generate"
+  "generate": "Generate",
+  "noAudios": "No Audios",
+  "openAudio": "Open Audio"
 }

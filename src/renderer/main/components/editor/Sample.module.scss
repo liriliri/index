@@ -1,11 +1,14 @@
 @use '../../../theme' as *;
 
 .container {
-  padding-top: 30px;
   border: 1px solid var(--color-border);
   border-radius: #{$border-radius-s-m}px;
   margin-bottom: 8px;
   :global(.luna-audio-player) {
     border: none;
   }
+}
+
+.toolbar {
+  padding: 0 2px;
 }
