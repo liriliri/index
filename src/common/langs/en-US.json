@@ -28,5 +28,6 @@
   "sysPreference": "System Preference",
   "language": "Language",
   "requireReload": "Requires reload",
-  "restartIndex": "Restart INDEX"
+  "restartIndex": "Restart INDEX",
+  "generate": "Generate"
 }

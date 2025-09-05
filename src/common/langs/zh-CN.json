@@ -28,5 +28,6 @@
   "sysPreference": "系统设置",
   "language": "语言",
   "requireReload": "需要重新启动",
-  "restartIndex": "重启 INDEX"
+  "restartIndex": "重启 INDEX",
+  "generate": "生成"
 }

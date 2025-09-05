@@ -1,10 +1,11 @@
 import { BrowserWindow } from 'electron'
 import once from 'licia/once'
-import { getSettingsStore } from '../lib/store'
+import { getMainStore, getSettingsStore } from '../lib/store'
 import { IpcGetStore, IpcSetStore } from 'share/common/types'
 import { handleEvent } from 'share/main/lib/util'
 import * as window from 'share/main/lib/window'
 
+const store = getMainStore()
 const settingsStore = getSettingsStore()
 
 let win: BrowserWindow | null = null
@@ -30,6 +31,13 @@ export function showWin() {
 }
 
 const initIpc = once(() => {
+  handleEvent('setMainStore', <IpcSetStore>(
+    ((name, val) => store.set(name, val))
+  ))
+  handleEvent('getMainStore', <IpcGetStore>((name) => store.get(name)))
+  store.on('change', (name, val) => {
+    window.sendAll('changeMainStore', name, val)
+  })
   handleEvent('setSettingsStore', <IpcSetStore>((name, val) => {
     settingsStore.set(name, val)
   }))

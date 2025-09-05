@@ -12,6 +12,7 @@ import CopyButton from 'share/renderer/components/CopyButton'
 import ToolbarIcon from 'share/renderer/components/ToolbarIcon'
 import { useState } from 'react'
 import SettingsModal from './SettingsModal'
+import copy from 'licia/copy'
 
 export default observer(function Toolbar() {
   const [settingsModalVisible, setSettingsModalVisible] = useState(false)
@@ -33,8 +34,24 @@ export default observer(function Toolbar() {
     <>
       <LunaToolbar>
         <LunaToolbarButton onClick={() => {}}>
-          <CopyButton className="toolbar-icon" onClick={() => {}} />
+          <CopyButton
+            className="toolbar-icon"
+            onClick={() => copy(store.text)}
+          />
         </LunaToolbarButton>
+        <ToolbarIcon
+          icon="paste"
+          title={t('paste')}
+          onClick={async () => {
+            const text = await navigator.clipboard.readText()
+            store.setText(text)
+          }}
+        />
+        <ToolbarIcon
+          icon="eraser"
+          title={t('clear')}
+          onClick={() => store.setText('')}
+        />
         {loading}
         <LunaToolbarSpace />
         <ToolbarIcon

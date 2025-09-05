@@ -6,6 +6,8 @@ import { invoke } from 'share/preload/util'
 export default Object.assign(mainObj, {
   getIndexTTSPort: invoke<IpcGetIndexTTSPort>('getIndexTTSPort'),
   isIndexTTSRunning: invoke<IpcIsIndexTTSRunning>('isIndexTTSRunning'),
+  getMainStore: invoke<IpcGetStore>('getMainStore'),
+  setMainStore: invoke<IpcSetStore>('setMainStore'),
   getSettingsStore: invoke<IpcGetStore>('getSettingsStore'),
   setSettingsStore: invoke<IpcSetStore>('setSettingsStore'),
 })

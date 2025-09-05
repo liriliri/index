@@ -3,8 +3,9 @@ import Sidebar from './Sidebar'
 import Style from './Editor.module.scss'
 import store from '../../store'
 import { t } from '../../../../common/util'
+import { observer } from 'mobx-react-lite'
 
-export default function Editor() {
+export default observer(function Editor() {
   return (
     <LunaSplitPane>
       <LunaSplitPaneItem
@@ -12,7 +13,14 @@ export default function Editor() {
         weight={100 - store.sidebarWeight}
         minSize={400}
       >
-        <textarea placeholder={t('enterText')} />
+        <textarea
+          placeholder={t('enterText')}
+          value={store.text}
+          onChange={(e) => {
+            console.log(e.target.value)
+            store.setText(e.target.value)
+          }}
+        />
       </LunaSplitPaneItem>
       <LunaSplitPaneItem
         className={Style.sidebar}
@@ -23,4 +31,4 @@ export default function Editor() {
       </LunaSplitPaneItem>
     </LunaSplitPane>
   )
-}
+})
