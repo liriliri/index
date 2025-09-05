@@ -6,12 +6,18 @@ import { t } from '../../../common/util'
 import { Settings } from './settings'
 import { setMainStore } from '../../lib/util'
 
+interface ISample {
+  url: string
+  name: string
+}
+
 class Store extends BaseStore {
   isIndexTTSReady = false
   isIndexTTSErr = false
   sidebarWeight = 30
   audioWeight = 30
   text = ''
+  sample: ISample = { url: '', name: t('sampleTip') }
   settings = new Settings()
   constructor() {
     super()

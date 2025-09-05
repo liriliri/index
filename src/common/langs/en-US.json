@@ -31,5 +31,6 @@
   "restartIndex": "Restart INDEX",
   "generate": "Generate",
   "noAudios": "No Audios",
-  "openAudio": "Open Audio"
+  "openAudio": "Open Audio",
+  "sampleTip": "You can replace the voice with any voice you want"
 }

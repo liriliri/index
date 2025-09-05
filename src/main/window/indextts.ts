@@ -33,7 +33,7 @@ async function start() {
   port = await getFreePort(port, '127.0.0.1')
 
   extend(process.env, env)
-  subprocess = childProcess.spawn('python', ['server.py'], {
+  subprocess = childProcess.spawn('python', ['-u', 'server.py'], {
     cwd: appDir,
     windowsHide: true,
     stdio: ['inherit', 'pipe', 'pipe'],
