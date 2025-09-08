@@ -6,6 +6,7 @@ import { t } from '../../../common/util'
 import { Settings } from './settings'
 import { setMainStore } from '../../lib/util'
 import fileUrl from 'licia/fileUrl'
+import splitPath from 'licia/splitPath'
 
 interface ISample {
   url: string
@@ -31,9 +32,18 @@ class Store extends BaseStore {
       text: observable,
       sample: observable,
       setText: action,
+      setSample: action,
     })
 
     this.init()
+  }
+  setSample(path: string) {
+    this.sample = {
+      url: fileUrl(path),
+      name: splitPath(path).name,
+    }
+
+    setMainStore('sample', path)
   }
   setText(text: string) {
     this.text = text
@@ -49,7 +59,14 @@ class Store extends BaseStore {
     }
 
     const sample = await main.getMainStore('sample')
-    if (!sample) {
+    if (sample && node.existsSync(sample)) {
+      runInAction(() => {
+        this.sample = {
+          url: fileUrl(sample),
+          name: splitPath(sample).name,
+        }
+      })
+    } else {
       const defaultSample = await main.resolveResources('sample.wav')
       runInAction(() => {
         this.sample = { url: fileUrl(defaultSample), name: t('sampleTip') }

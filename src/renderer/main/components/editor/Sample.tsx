@@ -6,6 +6,8 @@ import ToolbarIcon from 'share/renderer/components/ToolbarIcon'
 import { t } from '../../../../common/util'
 import { colorPrimary, colorPrimaryDark } from '../../../../common/theme'
 import store from '../../store'
+import openFile from 'licia/openFile'
+import isEmpty from 'licia/isEmpty'
 
 export default observer(function Sample() {
   const progressColor = store.theme === 'dark' ? colorPrimaryDark : colorPrimary
@@ -16,7 +18,15 @@ export default observer(function Sample() {
         <ToolbarIcon
           icon="open-file"
           title={t('openAudio')}
-          onClick={() => {}}
+          onClick={() => {
+            openFile({
+              accept: 'audio/wav,audio/mp4,audio/mpeg',
+            }).then((files) => {
+              if (!isEmpty(files)) {
+                store.setSample(files[0].path)
+              }
+            })
+          }}
         />
       </LunaToolbar>
       <LunaAudioPlayer
