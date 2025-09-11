@@ -7,7 +7,8 @@ type Health = {
 }
 
 type InferOptions = {
-  output: string
+  output_path: string
+  infer_mode: string
 }
 
 const api = axios.create({
@@ -32,7 +33,8 @@ export async function infer(text: string, audio: Blob, options: InferOptions) {
   const formData = new FormData()
   formData.append('text', text)
   formData.append('prompt_audio', audio)
-  formData.append('output_path', options.output)
+  formData.append('output_path', options.output_path)
+  formData.append('infer_mode', options.infer_mode)
 
   const response = await api.post<{
     output_path: string

@@ -46,6 +46,7 @@
     "eslint": "^9.32.0",
     "eslint-config-prettier": "^10.1.8",
     "execa": "^9.6.0",
+    "filenamify": "^6.0.0",
     "fs-extra": "^11.3.0",
     "licia": "^1.48.0",
     "luna-audio-player": "^0.2.1",

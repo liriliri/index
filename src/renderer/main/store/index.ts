@@ -9,6 +9,7 @@ import splitPath from 'licia/splitPath'
 import { Task, TaskStatus } from './task'
 import convertBin from 'licia/convertBin'
 import { notify } from 'share/renderer/lib/util'
+import strWidth from 'licia/strWidth'
 
 interface ISample {
   path: string
@@ -21,6 +22,12 @@ interface IAudio {
   text: string
 }
 
+export enum InferMode {
+  Auto = 'auto',
+  Normal = 'normal',
+  Fast = 'fast',
+}
+
 class Store extends BaseStore {
   isIndexTTSReady = false
   isIndexTTSErr = false
@@ -29,6 +36,7 @@ class Store extends BaseStore {
   text = ''
   tasks: Task[] = []
   sample: ISample = { path: '', name: t('sampleTip') }
+  inferMode: InferMode = InferMode.Normal
   audios: IAudio[] = []
   settings = new Settings()
   constructor() {
@@ -43,6 +51,7 @@ class Store extends BaseStore {
       sample: observable,
       audios: observable,
       tasks: observable,
+      inferMode: observable,
       setText: action,
       setSample: action,
     })
@@ -57,18 +66,36 @@ class Store extends BaseStore {
 
     setMainStore('sample', path)
   }
+  setInferMode(mode: InferMode) {
+    this.inferMode = mode
+
+    setMainStore('inferMode', mode)
+  }
   setText(text: string) {
     this.text = text
 
     setMainStore('text', text)
   }
   createTask = async () => {
-    let audio = this.sample.audio
+    const { sample, text } = this
+
+    let audio = sample.audio
     if (!audio) {
-      audio = convertBin(await node.readFile(this.sample.path), 'Blob') as Blob
-      this.sample.audio = audio
+      audio = convertBin(await node.readFile(sample.path), 'Blob') as Blob
+      sample.audio = audio
     }
-    const task = new Task(this.text, audio, {})
+    let inferMode: 'normal' | 'fast' = 'normal'
+    if (this.inferMode === InferMode.Fast) {
+      inferMode = 'fast'
+    } else if (this.inferMode === InferMode.Auto) {
+      if (strWidth(text) > 100) {
+        inferMode = 'fast'
+      }
+    }
+    const task = new Task(text, audio, {
+      inferMode,
+      outputDir: '/Users/surunzi/Desktop',
+    })
     runInAction(() => {
       this.tasks = [...this.tasks, task]
     })
@@ -111,11 +138,15 @@ class Store extends BaseStore {
   }
   async init() {
     const text = await main.getMainStore('text')
-    if (text) {
-      runInAction(() => {
+    const inferMode = await main.getMainStore('inferMode')
+    runInAction(() => {
+      if (text) {
         this.text = text
-      })
-    }
+      }
+      if (inferMode) {
+        this.inferMode = inferMode
+      }
+    })
 
     const sample = await main.getMainStore('sample')
     if (sample && node.existsSync(sample)) {

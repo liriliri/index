@@ -1,8 +1,18 @@
+@use '../../../theme' as *;
+
 .container {
   width: 100%;
   height: 100%;
   overflow: auto;
   padding: 14px 8px;
+  padding-bottom: 0;
+  :global(.luna-audio-player) {
+    margin-bottom: 14px;
+    border-radius: #{$border-radius-s-m}px;
+    &:hover {
+      border-color: var(--color-primary);
+    }
+  }
 }
 
 .no-audios {

@@ -2,6 +2,10 @@ import Emitter from 'licia/Emitter'
 import uuid from 'licia/uuid'
 import { makeObservable, observable, runInAction } from 'mobx'
 import * as indextts from '../../lib/indextts'
+import truncate from 'licia/truncate'
+import dateFormat from 'licia/dateFormat'
+import normalizePath from 'licia/normalizePath'
+import filenamify from 'filenamify'
 
 export enum TaskStatus {
   Wait,
@@ -11,7 +15,8 @@ export enum TaskStatus {
 }
 
 export interface IInferOptions {
-  output: string
+  inferMode: 'normal' | 'fast'
+  outputDir: string
 }
 
 export class Task extends Emitter {
@@ -34,13 +39,20 @@ export class Task extends Emitter {
     this.text = text
     this.audio = audio
     this.options = options
+    let name = truncate(text, 100, {
+      separator: ' ',
+      ellipsis: '',
+    })
+    name = `${filenamify(name)}-${dateFormat('yyyymmddHHMMss')}.wav`
+    this.output = normalizePath(`${options.outputDir}/${name}`)
   }
   async run() {
     const { options } = this
 
     try {
       const result = await indextts.infer(this.text, this.audio, {
-        output: options.output,
+        output_path: this.output,
+        infer_mode: options.inferMode,
       })
       runInAction(() => {
         this.progress = 100

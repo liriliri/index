@@ -33,5 +33,9 @@
   "noAudios": "空列表",
   "openAudio": "打开音频",
   "sampleTip": "可以将语音替换为所需的任何语音",
-  "generateErr": "生成音频失败"
+  "generateErr": "生成音频失败",
+  "inferMode": "推理模式",
+  "auto": "自动",
+  "normalInfer": "普通推理",
+  "batchInfer": "批次推理"
 }

@@ -12,7 +12,7 @@ export default function App() {
       <Toolbar />
       <div className={Style.workspace}>
         <LunaSplitPane direction="vertical">
-          <LunaSplitPaneItem weight={100 - store.audioWeight} minSize={250}>
+          <LunaSplitPaneItem weight={100 - store.audioWeight} minSize={300}>
             <Editor />
           </LunaSplitPaneItem>
           <LunaSplitPaneItem
