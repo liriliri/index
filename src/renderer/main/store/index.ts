@@ -1,16 +1,24 @@
 import { action, makeObservable, observable, runInAction } from 'mobx'
 import BaseStore from 'share/renderer/store/BaseStore'
-import * as indexTTS from '../../lib/indextts'
+import * as indextts from '../../lib/indextts'
 import LunaModal from 'luna-modal'
 import { t } from '../../../common/util'
 import { Settings } from './settings'
 import { setMainStore } from '../../lib/util'
-import fileUrl from 'licia/fileUrl'
 import splitPath from 'licia/splitPath'
+import { Task, TaskStatus } from './task'
+import convertBin from 'licia/convertBin'
+import { notify } from 'share/renderer/lib/util'
 
 interface ISample {
-  url: string
+  path: string
   name: string
+  audio?: Blob
+}
+
+interface IAudio {
+  path: string
+  text: string
 }
 
 class Store extends BaseStore {
@@ -19,7 +27,9 @@ class Store extends BaseStore {
   sidebarWeight = 30
   audioWeight = 30
   text = ''
-  sample: ISample = { url: '', name: t('sampleTip') }
+  tasks: Task[] = []
+  sample: ISample = { path: '', name: t('sampleTip') }
+  audios: IAudio[] = []
   settings = new Settings()
   constructor() {
     super()
@@ -31,6 +41,8 @@ class Store extends BaseStore {
       audioWeight: observable,
       text: observable,
       sample: observable,
+      audios: observable,
+      tasks: observable,
       setText: action,
       setSample: action,
     })
@@ -39,7 +51,7 @@ class Store extends BaseStore {
   }
   setSample(path: string) {
     this.sample = {
-      url: fileUrl(path),
+      path,
       name: splitPath(path).name,
     }
 
@@ -49,6 +61,53 @@ class Store extends BaseStore {
     this.text = text
 
     setMainStore('text', text)
+  }
+  createTask = async () => {
+    let audio = this.sample.audio
+    if (!audio) {
+      audio = convertBin(await node.readFile(this.sample.path), 'Blob') as Blob
+      this.sample.audio = audio
+    }
+    const task = new Task(this.text, audio, {})
+    runInAction(() => {
+      this.tasks = [...this.tasks, task]
+    })
+    this.doCreateTask()
+  }
+  doCreateTask() {
+    if (!this.isIndexTTSReady) {
+      return
+    }
+
+    const task = this.tasks[0]
+    if (task) {
+      switch (task.status) {
+        case TaskStatus.Success:
+        case TaskStatus.Fail:
+          this.tasks.shift()
+          this.doCreateTask()
+          break
+        case TaskStatus.Wait:
+          task.on('success', (text, output) => {
+            this.audios = [
+              ...this.audios,
+              {
+                text,
+                path: output,
+              },
+            ]
+            this.doCreateTask()
+          })
+          task.on('fail', () => {
+            notify(t('generateErr'), { icon: 'error' })
+            this.doCreateTask()
+          })
+          task.run()
+          break
+        case TaskStatus.Generating:
+          break
+      }
+    }
   }
   async init() {
     const text = await main.getMainStore('text')
@@ -62,18 +121,21 @@ class Store extends BaseStore {
     if (sample && node.existsSync(sample)) {
       runInAction(() => {
         this.sample = {
-          url: fileUrl(sample),
+          path: sample,
           name: splitPath(sample).name,
         }
       })
     } else {
       const defaultSample = await main.resolveResources('sample.wav')
       runInAction(() => {
-        this.sample = { url: fileUrl(defaultSample), name: t('sampleTip') }
+        this.sample = {
+          path: defaultSample,
+          name: t('sampleTip'),
+        }
       })
     }
 
-    const ready = await indexTTS.wait()
+    const ready = await indextts.wait()
     if (ready) {
       runInAction(() => {
         this.isIndexTTSReady = true

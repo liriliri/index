@@ -32,5 +32,6 @@
   "generate": "Generate",
   "noAudios": "No Audios",
   "openAudio": "Open Audio",
-  "sampleTip": "You can replace the voice with any voice you want"
+  "sampleTip": "You can replace the voice with any voice you want",
+  "generateErr": "Failed to generate audio"
 }

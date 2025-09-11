@@ -32,5 +32,6 @@
   "generate": "生成",
   "noAudios": "空列表",
   "openAudio": "打开音频",
-  "sampleTip": "可以将语音替换为所需的任何语音"
+  "sampleTip": "可以将语音替换为所需的任何语音",
+  "generateErr": "生成音频失败"
 }

@@ -6,6 +6,10 @@ type Health = {
   model_loaded: boolean
 }
 
+type InferOptions = {
+  output: string
+}
+
 const api = axios.create({
   baseURL: `http://127.0.1:7860`,
   headers: {
@@ -22,6 +26,23 @@ export async function checkHealth(): Promise<Health> {
   const response = await api.get<Health>('/api/health')
 
   return response.data
+}
+
+export async function infer(text: string, audio: Blob, options: InferOptions) {
+  const formData = new FormData()
+  formData.append('text', text)
+  formData.append('prompt_audio', audio)
+  formData.append('output_path', options.output)
+
+  const response = await api.post<{
+    output_path: string
+  }>('/api/infer', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+
+  return response.data.output_path
 }
 
 export const wait = singleton(async function (checkInterval = 5) {

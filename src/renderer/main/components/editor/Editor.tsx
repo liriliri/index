@@ -16,10 +16,7 @@ export default observer(function Editor() {
         <textarea
           placeholder={t('enterText')}
           value={store.text}
-          onChange={(e) => {
-            console.log(e.target.value)
-            store.setText(e.target.value)
-          }}
+          onChange={(e) => store.setText(e.target.value)}
         />
       </LunaSplitPaneItem>
       <LunaSplitPaneItem

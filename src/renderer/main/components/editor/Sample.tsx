@@ -8,6 +8,7 @@ import { colorPrimary, colorPrimaryDark } from '../../../../common/theme'
 import store from '../../store'
 import openFile from 'licia/openFile'
 import isEmpty from 'licia/isEmpty'
+import fileUrl from 'licia/fileUrl'
 
 export default observer(function Sample() {
   const progressColor = store.theme === 'dark' ? colorPrimaryDark : colorPrimary
@@ -32,7 +33,7 @@ export default observer(function Sample() {
       <LunaAudioPlayer
         progressColor={progressColor}
         name={store.sample.name}
-        url={store.sample.url}
+        url={fileUrl(store.sample.path)}
       />
     </div>
   )
