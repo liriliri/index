@@ -9,6 +9,8 @@
   :global(.luna-audio-player) {
     margin-bottom: 14px;
     border-radius: #{$border-radius-s-m}px;
+    transition: 0.3s border-color;
+    background: var(--color-bg-container-lighter);
     &:hover {
       border-color: var(--color-primary);
     }

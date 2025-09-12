@@ -10,7 +10,11 @@
     height: 100%;
     resize: none;
     border-radius: #{$border-radius-s-m}px;
-    background: var(--color-bg-container);
+    background: var(--color-bg-container-darker);
+    transition: 0.3s border-color;
+    &:focus {
+      border-color: var(--color-primary);
+    }
   }
 }
 

@@ -10,4 +10,5 @@ export default Object.assign(mainObj, {
   setMainStore: invoke<IpcSetStore>('setMainStore'),
   getSettingsStore: invoke<IpcGetStore>('getSettingsStore'),
   setSettingsStore: invoke<IpcSetStore>('setSettingsStore'),
+  showIndexTTS: invoke('showIndexTTS'),
 })

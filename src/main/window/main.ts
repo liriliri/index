@@ -4,6 +4,7 @@ import { getMainStore, getSettingsStore } from '../lib/store'
 import { IpcGetStore, IpcSetStore } from 'share/common/types'
 import { handleEvent } from 'share/main/lib/util'
 import * as window from 'share/main/lib/window'
+import * as indextts from './indextts'
 
 const store = getMainStore()
 const settingsStore = getSettingsStore()
@@ -44,4 +45,5 @@ const initIpc = once(() => {
   handleEvent('getSettingsStore', <IpcGetStore>(
     ((name) => settingsStore.get(name))
   ))
+  handleEvent('showIndexTTS', () => indextts.showWin())
 })

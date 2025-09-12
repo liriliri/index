@@ -43,7 +43,7 @@ export class Task extends Emitter {
       separator: ' ',
       ellipsis: '',
     })
-    name = `${filenamify(name)}-${dateFormat('yyyymmddHHMMss')}.wav`
+    name = `${filenamify(name)}-${dateFormat('mmddHHMMss')}.wav`
     this.output = normalizePath(`${options.outputDir}/${name}`)
   }
   async run() {

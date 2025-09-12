@@ -1,0 +1,32 @@
+const pkg = await fs.readJson('package.json')
+const electron = pkg.devDependencies.electron
+delete pkg.devDependencies
+pkg.devDependencies = {
+  electron,
+}
+delete pkg.scripts
+pkg.scripts = {
+  start: 'electron main/index.js',
+}
+pkg.main = 'main/index.js'
+
+await $`npm run build:main`
+await $`npm run build:preload`
+await $`npm run build:renderer`
+
+await fs.copy('build', 'dist/build')
+await fs.copy('indextts/env', 'dist/indextts/env')
+await $`./dist/indextts/env/install.mjs`
+cd('indextts/index-tts')
+await $`git archive --format=zip --output=index-tts.zip HEAD`
+await $`unzip -o index-tts.zip -d ../../dist/indextts/index-tts`
+await $`rm index-tts.zip`
+cd('../../dist')
+await $`./indextts/env/prepare.mjs`
+await $`rm -rf ./indextts/env`
+
+await fs.writeJson('package.json', pkg, {
+  spaces: 2,
+})
+
+await $`npm i`

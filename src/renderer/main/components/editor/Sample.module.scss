@@ -5,8 +5,10 @@
   border-radius: #{$border-radius-s-m}px;
   margin-bottom: 8px;
   overflow: hidden;
+  background: var(--color-bg-container-lighter);
   :global(.luna-audio-player) {
     border: none;
+    background: var(--color-bg-container-lighter);
   }
 }
 
