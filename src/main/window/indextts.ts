@@ -7,6 +7,7 @@ import { Readable } from 'stream'
 import { app, BrowserWindow } from 'electron'
 import once from 'licia/once'
 import { IpcGetIndexTTSPort, IpcIsIndexTTSRunning } from '../../common/types'
+import toStr from 'licia/toStr'
 
 let port = 7860
 const getPort: IpcGetIndexTTSPort = () => port
@@ -33,11 +34,15 @@ async function start() {
   port = await getFreePort(port, '127.0.0.1')
 
   extend(process.env, env)
-  subprocess = childProcess.spawn('python', ['-u', 'server.py'], {
-    cwd: appDir,
-    windowsHide: true,
-    stdio: ['inherit', 'pipe', 'pipe'],
-  })
+  subprocess = childProcess.spawn(
+    'uv',
+    ['run', 'server.py', '--port', toStr(port)],
+    {
+      cwd: appDir,
+      windowsHide: true,
+      stdio: ['inherit', 'pipe', 'pipe'],
+    }
+  )
   subprocess.stdout.on('data', (data) => process.stdout.write(data))
   subprocess.stderr.on('data', (data) => process.stderr.write(data))
   subprocess.on('exit', (code, signal) => {
@@ -49,7 +54,7 @@ async function start() {
     if (!subprocess.pid) {
       isDead = true
     }
-    window.sendAll('webUIError')
+    window.sendAll('indexTTSError')
   })
 
   app.on('will-quit', () => subprocess.kill())

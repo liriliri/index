@@ -1,10 +1,7 @@
 #!/usr/bin/env zx
 import { execa } from 'execa'
-import extend from 'licia/extend.js'
 import isWindows from 'licia/isWindows.js'
 import { resolve, getPlatform } from './util.mjs'
-
-const platform = getPlatform()
 
 async function main() {
   const appDir = resolve('index-tts')
@@ -22,13 +19,13 @@ async function main() {
     PATH,
   }
 
-  await execa('pip', ['install', 'torch', 'torchaudio'], {
+  await execa('pip', ['install', 'uv'], {
     cwd: appDir,
     stdio: 'inherit',
     env,
   })
 
-  await execa('pip', ['install', '-e', '.[webui]', '--no-build-isolation'], {
+  await execa('uv', ['sync', '--all-extras'], {
     cwd: appDir,
     stdio: 'inherit',
     env,
