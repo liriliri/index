@@ -11,7 +11,9 @@ import 'luna-modal/css'
 import 'luna-setting/css'
 import 'luna-audio-player/css'
 import 'luna-notification/css'
+import 'luna-data-grid/css'
 import 'share/renderer/luna.scss'
+import './luna.scss'
 import 'share/renderer/main.scss'
 import './icon.css'
 
@@ -38,6 +40,10 @@ function renderApp() {
     case 'terminal':
       App = lazy(() => import('share/renderer/terminal/App.js') as Promise<any>)
       title = t('terminal')
+      break
+    case 'process':
+      App = lazy(() => import('share/renderer/process/App.js') as Promise<any>)
+      title = t('processManager')
       break
   }
 
