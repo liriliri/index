@@ -7,6 +7,9 @@ import fileUrl from 'licia/fileUrl'
 import isEmpty from 'licia/isEmpty'
 import { observer } from 'mobx-react-lite'
 import { colorPrimary, colorPrimaryDark } from '../../../../common/theme'
+import each from 'licia/each'
+import { TaskStatus } from '../../store/task'
+import { LoadingBar } from 'share/renderer/components/loading'
 
 export default observer(function Audio() {
   const progressColor = store.theme === 'dark' ? colorPrimaryDark : colorPrimary
@@ -16,9 +19,21 @@ export default observer(function Audio() {
       <LunaAudioPlayer
         key={audio.path}
         name={audio.text}
+        waveHeight={30}
         progressColor={progressColor}
         url={fileUrl(audio.path)}
       />
+    )
+  })
+
+  each(store.tasks, (task) => {
+    audios.push(
+      <div className={Style.task} key={task.id}>
+        <div className={Style.taskStatus}>
+          {task.status === TaskStatus.Generating && <LoadingBar />}
+        </div>
+        <div className={Style.taskText}>{task.text}</div>
+      </div>
     )
   })
 

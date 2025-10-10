@@ -49,6 +49,8 @@ export class Task extends Emitter {
   async run() {
     const { options } = this
 
+    this.status = TaskStatus.Generating
+
     try {
       const result = await indextts.infer(this.text, this.audio, {
         output_path: this.output,
